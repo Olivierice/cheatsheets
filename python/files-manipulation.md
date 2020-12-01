@@ -17,5 +17,3 @@ open('myfile.txt', 'w')
 open('myfile.txt', 'a')
 ```
 
-
-
