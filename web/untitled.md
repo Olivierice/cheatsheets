@@ -10,6 +10,8 @@
 
 {% tabs %}
 {% tab title="Dirb" %}
+I like to use dirb because is pretty straighforward to used as you can see below.
+
 ```bash
 dirb https://10.10.10.100/ /usr/share/wordlists/enum.txt
 dirb https://10.10.10.100/ /usr/share/wordlists/enum.txt -X .html,.py,.php
@@ -72,11 +74,12 @@ Error: error on running goubster: unable to connect to https://websitetobf inval
 {% endtab %}
 
 {% tab title="Wfuzz" %}
-Wfuzz is a little bit more complex to use but allows more features.
+Wfuzz is a little bit more complex to use but offers several features, including one that allows to fuzz by knowing the filename but not the intermediate directories.
 
 ```bash
-wfuzz -c -w /usr/share/wordlists/dirb/common.txt --hc 404,502 https://iptofuzz/FUZZ
-wfuzz -c -z file,/usr/share/wordlists/fuzz.txt -z file,/usr/share/wordlists/fuzz2.txt --hc 404 http://ip/FUZZ/FUZ2Z
+wfuzz -c -w dirb/common.txt --hc 404,502 https://target/FUZZ
+wfuzz -c -z file,/wordlists/fuzz.txt -z file,/usr/share/wordlists/fuzz2.txt --hc 404 http://target/FUZZ/FUZ2Z
+wfuzz -c -w dirb/common.txt --hc 404,502 https://target/FUZZ/index.html
 ```
 
 `-c    :Output with color  
@@ -91,6 +94,8 @@ wfuzz -c -z file,/usr/share/wordlists/fuzz.txt -z file,/usr/share/wordlists/fuzz
 -z payload : Specify a payload for each FUZZ keyword used in the form of name[,parameter][,encoder]. A list of encoders can be used, ie. md5-sha1. Encoders can be chained, ie. md5@sha1. Encoders category can be used. ie. url Use help as a payload to show payload plugin's details (you can filter using --slice)   
 -w wordlist : Specify a wordlist file (alias for -z file,wordlist).   
 --hc/hl/hw/hh N[,N]+ : Hide responses with the specified code/lines/words/chars (Use BBB for taking values from baseline)`
+
+Don't forget to use the --help page to see all options!
 
 {% hint style="info" %}
 You can add all exceptions you don't want to see behind --hc flag.  
@@ -107,7 +112,41 @@ You can add all exceptions you don't want to see behind --hc flag.
 
 [https://wfuzz.readthedocs.io/en/latest/index.html](https://wfuzz.readthedocs.io/en/latest/index.html)
 {% endtab %}
+
+{% tab title="Final Recon" %}
+Final Recon offers several options as Wfuzz does, and it's pretty simple to use.
+
+```bash
+finalrecon --dir -s -w /usr/share/wordlists/dirb/common.txt https://target
+```
+
+`--headers Header Information   
+--sslinfo SSL Certificate Information   
+--whois Whois Lookup   
+--crawl Crawl Target   
+--dns DNS Enumeration   
+--sub Sub-Domain Enumeration   
+--trace Traceroute   
+--dir Directory Search   
+--ps Fast Port Scan   
+--full Full Recon   
+Extra Options:   
+-t T Number of Threads [ Default : 30 ]   
+-T T Request Timeout [ Default : 30.0 ]   
+-w W Path to Wordlist [ Default : wordlists/dirb_common.txt ]   
+-r Allow Redirect [ Default : False ]   
+-s Toggle SSL Verification [ Default : True ]   
+-sp SP Specify SSL Port [ Default : 443 ]   
+-d D Custom DNS Servers [ Default : 1.1.1.1 ]   
+-e E File Extensions [ Example : txt, xml, php ]   
+-m M Traceroute Mode [ Default : UDP ] [ Available : TCP, ICMP ]   
+-p P Port for Traceroute [ Default : 80 / 33434 ]   
+-tt TT Traceroute Timeout [ Default : 1.0 ]   
+-o O Export Output [ Default : txt ] [ Available : xml, csv ]`
+{% endtab %}
 {% endtabs %}
+
+
 
 
 
