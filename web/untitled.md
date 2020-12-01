@@ -2,11 +2,10 @@
 
 ## Directories Enumeration
 
-### Dirb
-
-### Gobuster
-
-### Wfuzz
+* Dirb
+* Gobuster
+* Wfuzz
+* FinalRecon
 
 {% tabs %}
 {% tab title="Dirb" %}
@@ -41,7 +40,7 @@ z  : Add a milliseconds delay to not cause excessive Flood.`
 
 ### Official Documentation
 
-[http://dirb.sourceforge.net/](http://dirb.sourceforge.net/)
+{% embed url="http://dirb.sourceforge.net/" %}
 {% endtab %}
 
 {% tab title="Gobuster" %}
@@ -120,6 +119,12 @@ Final Recon offers several options as Wfuzz does, and it's pretty simple to use.
 finalrecon --dir -s -w /usr/share/wordlists/dirb/common.txt https://target
 ```
 
+{% hint style="info" %}
+Be aware that finalrecon saves results in a file:
+
+`[!] Exporting to /root/.local/share/finalrecon/dumps/target.txt`
+{% endhint %}
+
 `--headers Header Information   
 --sslinfo SSL Certificate Information   
 --whois Whois Lookup   
@@ -143,12 +148,113 @@ Extra Options:
 -p P Port for Traceroute [ Default : 80 / 33434 ]   
 -tt TT Traceroute Timeout [ Default : 1.0 ]   
 -o O Export Output [ Default : txt ] [ Available : xml, csv ]`
+
+### Official Documentation
+
+[https://github.com/thewhiteh4t/FinalRecon](https://github.com/thewhiteh4t/FinalRecon)
+{% endtab %}
+{% endtabs %}
+
+## Scan Vulnerabilities
+
+* Nikto
+* Wapiti
+
+{% tabs %}
+{% tab title="Nikto" %}
+```bash
+# Plugins Nikto can use - By default, Nikto uses all of them.
+nikto -list-plugins
+
+nikto -host https://target -Plugins apacheusers,headers,tests
+nikto -host https://target
+```
+
+### Defaults Plugins
+
+`dir_traversal   
+report_csv   
+auth   
+fileops   
+dictionary   
+tests   
+apacheusers   
+favicon   
+clientaccesspolicy   
+outdated   
+content_search   
+embedded   
+negotiate   
+drupal   
+shellshock   
+parked   
+report_json   
+report_nbe   
+httpoptions   
+domino   
+multiple_index   
+siebel   
+cgi   
+origin_reflection   
+dishwasher   
+report_text   
+report_html   
+headers   
+sitefiles   
+apache_expect_xss   
+report_xml   
+msgs   
+ms10_070   
+paths   
+docker_registry   
+put_del_test   
+strutshock   
+robots   
+report_sqlg   
+ssl   
+cookies`
+
+### Official Documentation
+
+[https://www.cirt.net/Nikto2](https://www.cirt.net/Nikto2)
+{% endtab %}
+
+{% tab title="Wapiti" %}
+### Installation
+
+```bash
+git clone https://github.com/IFGHou/wapiti
+cd wapiti
+python setup.py install
+```
+
+{% hint style="warning" %}
+I used python2 because it did not worked with python3.
+{% endhint %}
+
+I reproach a not very compact help page... So I'll let you discover the options wapiti has.
+
+```bash
+wapiti -u http://target/
+wapiti -u --auth-method basic https://target --verify-ssl 0
+```
+
+`usage: wapiti [-s URL] [-x URL] [-p PROXY_URL] [-c COOKIE_FILE] [-t SECONDS]   
+       [-a CREDENTIALS] [--auth-method {basic,digest,kerberos,ntlm}] [-r PARAMETER]            
+       [-H HEADER] [-U AGENT] [-n COUNT] [-d DEPTH] [-m MODULES_LIST] [-u] [-v LEVEL]   
+       [-b {page,folder,domain,url}] [-f {json,html,txt,openvas,vulneranet,xml}]   
+       [-o OUPUT_PATH] [-i [FILE]] [-k [FILE]] [--verify-ssl {0,1}] [--version]   
+       [-h] BASE_URL`
+
+### Official Documentation
+
+[https://wapiti.sourceforge.io/](https://wapiti.sourceforge.io/)
 {% endtab %}
 {% endtabs %}
 
 
 
-
+### 
 
 
 
