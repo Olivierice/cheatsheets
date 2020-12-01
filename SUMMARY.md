@@ -11,7 +11,6 @@
 
 * [Tools](steganography/tools.md)
 * [Images](steganography/images.md)
-* [Untitled](steganography/untitled.md)
 
 ## Web
 

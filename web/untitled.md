@@ -10,7 +10,7 @@
 
 {% tabs %}
 {% tab title="Dirb" %}
-```text
+```bash
 dirb https://10.10.10.100/ /usr/share/wordlists/enum.txt
 dirb https://10.10.10.100/ /usr/share/wordlists/enum.txt -X .html,.py,.php
 ```
@@ -49,7 +49,7 @@ Gobuster can be used in three different modes:
 dns Uses DNS subdomain bruteforcing mode   
 vhost Uses VHOST bruteforcing mode`
 
-```text
+```bash
 gobuster dir -u http://10.10.10.100/ -w /usr/share/wordlists/enum.txt
 gobuster dir -u https://10.10.10.100/ -w /usr/share/wordlist/enum.txt -k
 ```
@@ -74,7 +74,7 @@ Error: error on running goubster: unable to connect to https://websitetobf inval
 {% tab title="Wfuzz" %}
 Wfuzz is a little bit more complex to use but allows more features.
 
-```text
+```bash
 wfuzz -c -w /usr/share/wordlists/dirb/common.txt --hc 404,502 https://iptofuzz/FUZZ
 wfuzz -c -z file,/usr/share/wordlists/fuzz.txt -z file,/usr/share/wordlists/fuzz2.txt --hc 404 http://ip/FUZZ/FUZ2Z
 ```
